@@ -193,6 +193,7 @@ body.laser-active #laser-dot {
   height: var(--hud-top);
   border-bottom: 1px solid var(--hairline);
   background: rgba(5, 5, 7, 0.72);
+  overflow: hidden;
 }
 
 .hud-bottom {
@@ -1429,7 +1430,7 @@ dialog::backdrop {
    RESPONSIVE ADAPTATION
    ========================================================================== */
 
-@media (max-width: 1260px) {
+@media (max-width: 1380px) {
   .hud-telemetry {
     display: none;
   }
