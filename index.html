@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVENT HORIZON // The Intelligence Explosion · 智能大爆炸</title>
+  <meta name="description" content="Zero-anchor-bias interactive keynote on the Future of AI &amp; the Intelligence Explosion — featuring real-time WebGL2 gravitational lensing, 7 live scientific simulations, and EN/中文 switching." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="EVENT HORIZON // The Intelligence Explosion · 智能大爆炸" />
+  <meta property="og:description" content="Beyond biological anchors: an interactive 5-act keynote with WebGL2 black-hole shaders and 7 live simulations." />
+  <meta property="og:image" content="https://isalicema.github.io/intelligence-explosion/assets/dyson-matrioshka.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EVENT HORIZON // The Intelligence Explosion · 智能大爆炸" />
+  <meta name="twitter:image" content="https://isalicema.github.io/intelligence-explosion/assets/dyson-matrioshka.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <canvas id="gl-backdrop" aria-hidden="true"></canvas>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+  <div class="observatory-grid" aria-hidden="true"></div>
+  <div id="laser-dot" aria-hidden="true"></div>
+
+  <!-- Top Architectural Observatory HUD -->
+  <header class="hud-top">
+    <div class="hud-brand">
+      <span class="hud-pulse" aria-hidden="true"></span>
+      <span>EVENT HORIZON</span>
+      <button type="button" class="lang-switch-btn" id="btn-lang" aria-label="Switch language between English and Chinese">
+        <span id="lang-label">EN · 中文</span>
+        <kbd style="font-size: 9px; opacity: 0.75; border: 1px solid currentColor; padding: 0 3px;">B</kbd>
+      </button>
+    </div>
+
+    <nav class="hud-act-pills" aria-label="Presentation Acts">
+      <button type="button" class="act-pill is-current" data-act-jump="1" data-i18n="hud.act1">I · Anchor</button>
+      <button type="button" class="act-pill" data-act-jump="2" data-i18n="hud.act2">II · Ignition</button>
+      <button type="button" class="act-pill" data-act-jump="3" data-i18n="hud.act3">III · Phase Shift</button>
+      <button type="button" class="act-pill" data-act-jump="4" data-i18n="hud.act4">IV · Cosmic</button>
+      <button type="button" class="act-pill" data-act-jump="5" data-i18n="hud.act5">V · Horizon</button>
+    </nav>
+
+    <div class="hud-telemetry" aria-live="polite">
+      <span class="telemetry-item"><span data-i18n="hud.lbl.substrate">SUBSTRATE:</span> <strong id="hud-substrate">BIO → SILICON</strong></span>
+      <span class="telemetry-item"><span data-i18n="hud.lbl.clock">CLOCK:</span> <strong id="hud-clock">100 Hz → 4.5 GHz</strong></span>
+      <span class="telemetry-item"><span data-i18n="hud.lbl.bias">BIAS:</span> <strong id="hud-bias">DISABLED</strong></span>
+    </div>
+  </header>
+
+  <!-- Main 15-Slide Deck Viewport -->
+  <main id="deck-viewport">
+
+    <!-- SLIDE 01 · HERO COVER -->
+    <section class="slide is-active" id="slide-01" aria-label="Slide 1: The Intelligence Explosion">
+      <div class="slide-inner hero-cover-layout">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s01.kicker">ACT I · THE ILLUSION OF LINEARITY</span>
+          <span class="coord-tag" data-i18n="s01.coord">EPOCH 13.8 Gyr // HINGE DECADE</span>
+        </div>
+
+        <div data-stagger="2">
+          <h1 class="display-hero slide-heading-focus" tabindex="-1" data-i18n="s01.title">
+            The Intelligence<br /><em>Explosion.</em>
+          </h1>
+        </div>
+
+        <p class="lead-copy" data-stagger="3" data-i18n="s01.lead">
+          Strip away every biological anchor—the 20-watt primate skull, the 40-bit-per-second voice box, the 8-hour workday, and 3% GDP growth. What approaches is not a "productivity tool." It is a <strong>vertical phase transition in the physics of matter</strong> as intelligence begins recursively rewriting itself.
+        </p>
+
+        <div class="hero-ticker-strip" data-stagger="4">
+          <div class="hero-ticker-cell">
+            <div class="t-key" data-i18n="s01.t1.k">Signal Propagation</div>
+            <div class="t-val" data-i18n="s01.t1.v">120 m/s → 300,000 km/s</div>
+          </div>
+          <div class="hero-ticker-cell">
+            <div class="t-key" data-i18n="s01.t2.k">Growth Dynamics</div>
+            <div class="t-val" data-i18n="s01.t2.v">Exponential → Hyperbolic</div>
+          </div>
+          <div class="hero-ticker-cell">
+            <div class="t-key" data-i18n="s01.t3.k">Thermodynamic Ceiling</div>
+            <div class="t-val" data-i18n="s01.t3.v">~10⁴⁵ Ops / Sec (Solar)</div>
+          </div>
+          <div class="hero-ticker-cell">
+            <div class="t-key" data-i18n="s01.t4.k">Forecasting Constraint</div>
+            <div class="t-val" style="color: var(--gold);" data-i18n="s01.t4.v">Zero Human Anchor Bias</div>
+          </div>
+        </div>
+
+        <div data-stagger="5" style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+          <button type="button" class="cta-start-btn" id="btn-hero-begin" data-i18n="s01.cta">
+            <span>Cross the Horizon</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <span class="coord-tag" data-i18n="s01.hint">Navigate with ← → · Space · [B] 中文/EN · [G] Grid · [N] Speaker Notes · [S] Synth Audio</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 02 · THE BIOLOGICAL ANCHOR TRAP -->
+    <section class="slide" id="slide-02" aria-label="Slide 2: The Biological Anchor Trap">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s02.kicker">02 // COGNITIVE SCALE MYOPIA</span>
+          <span class="coord-tag" data-i18n="s02.coord">INTERACTIVE SIMULATION · UN-ANCHOR THE SPECTRUM</span>
+        </div>
+
+        <div class="split-5-7">
+          <div style="display: flex; flex-direction: column; gap: 16px;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s02.title">
+              From Village Idiot to Von Neumann Is a <em>Sub-Pixel Dot.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.98rem;" data-i18n="s02.lead">
+              Human intuition treats "average person" to "Einstein" as the grand span of intellect. In reality, every human brain had to squeeze through the hominid birth canal and survive on <strong>20 watts of glucose</strong>.
+            </p>
+
+            <div class="glass-panel">
+              <div class="panel-label">
+                <span data-i18n="s02.p.l1">Substrate Physics Comparison</span>
+                <span data-i18n="s02.p.l2">BIO vs. PHOTONIC</span>
+              </div>
+              <div class="spec-ledger">
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s02.r1.d">Power Envelope</span>
+                  <span class="s-bio" data-i18n="s02.r1.b">20 Watts</span>
+                  <span class="s-sil" data-i18n="s02.r1.s">GW → TW → Stellar</span>
+                </div>
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s02.r2.d">Signal Velocity</span>
+                  <span class="s-bio" data-i18n="s02.r2.b">~120 m/s Axon</span>
+                  <span class="s-sil" data-i18n="s02.r2.s">3 × 10⁸ m/s (2.5M×)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s02.r3.d">Weight Sharing</span>
+                  <span class="s-bio" data-i18n="s02.r3.b">0 bps (20 Yr School)</span>
+                  <span class="s-sil" data-i18n="s02.r3.s">Instant Tensor Sync</span>
+                </div>
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s02.r4.d">Working Memory</span>
+                  <span class="s-bio" data-i18n="s02.r4.b">7 ± 2 Chunks</span>
+                  <span class="s-sil" data-i18n="s02.r4.s">Millions of Contexts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-stage" data-stagger="3">
+            <div class="sim-header">
+              <span class="sim-badge" data-i18n="s02.sim.badge">LIVE · MIND-SPACE SPECTRUM</span>
+              <span class="coord-tag" id="readout-mindspace">1× ZOOM</span>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-mindspace"></canvas>
+            </div>
+            <div class="sim-controls">
+              <div class="sim-slider-group">
+                <label for="slider-mindspace" data-i18n="s02.sim.label">ZOOM OUT:</label>
+                <input type="range" id="slider-mindspace" class="cosmic-slider" min="0" max="6" step="0.02" value="0" />
+              </div>
+              <div class="preset-pills">
+                <button type="button" class="preset-btn is-selected" data-mind-zoom="0" data-i18n="s02.z0">1× Bio</button>
+                <button type="button" class="preset-btn" data-mind-zoom="2">100×</button>
+                <button type="button" class="preset-btn" data-mind-zoom="4">10,000×</button>
+                <button type="button" class="preset-btn" data-mind-zoom="6" data-i18n="s02.z6">10⁶× Cosmic</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 03 · SUBJECTIVE TIME -->
+    <section class="slide" id="slide-03" aria-label="Slide 3: Subjective Time Dilation">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s03.kicker">03 // TEMPORAL DECOUPLING</span>
+          <span class="coord-tag" data-i18n="s03.coord">QUALITATIVE DEPTH × QUANTITATIVE CLOCK SPEED</span>
+        </div>
+
+        <div class="split-7-5">
+          <div class="sim-stage" data-stagger="2">
+            <div class="sim-header">
+              <span class="sim-badge" data-i18n="s03.sim.badge">LIVE · DUAL-SUBSTRATE CLOCK ACCELERATOR</span>
+              <button type="button" class="preset-btn" id="btn-reset-clock" data-i18n="s03.sim.reset">Reset Epoch</button>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-timedilation"></canvas>
+            </div>
+            <div class="sim-controls">
+              <span data-i18n="s03.sim.mult">DIGITAL CLOCK MULTIPLIER:</span>
+              <div class="preset-pills">
+                <button type="button" class="preset-btn" data-speed-mult="100" data-i18n="s03.m1">100× Near-Term</button>
+                <button type="button" class="preset-btn is-selected" data-speed-mult="10000" data-i18n="s03.m2">10,000× Wafer/Optical</button>
+                <button type="button" class="preset-btn" data-speed-mult="1000000" data-i18n="s03.m3">1,000,000× Picosecond</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px; justify-content: center;" data-stagger="3">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s03.title">
+              The <em>62-Year</em> Weekend.
+            </h2>
+            <p class="lead-copy" style="font-size: 0.98rem;" data-i18n="s03.lead">
+              Neurons fire chemically at ~100 Hz. Silicon switches in picoseconds. When an autonomous research collective thinks at <strong>10,000× biological subjective speed</strong>, human history appears frozen in amber.
+            </p>
+            <div class="grid-3-cards" style="grid-template-columns: 1fr;">
+              <div class="glass-panel">
+                <div class="panel-label"><span data-i18n="s03.c1.l1">1 Coffee Sip (4 Seconds)</span><span data-i18n="s03.c1.l2">AT 10,000×</span></div>
+                <div class="metric-big cyan" data-i18n="s03.c1.v">11.1 Hours</div>
+                <div class="metric-sub" data-i18n="s03.c1.sub">A full uninterrupted workday of Nobel-tier mathematical derivation before your cup touches the desk.</div>
+              </div>
+              <div class="glass-panel">
+                <div class="panel-label"><span data-i18n="s03.c2.l1">Friday 6 PM → Monday 9 AM</span><span data-i18n="s03.c2.l2">63 WALL HOURS</span></div>
+                <div class="metric-big accent" data-i18n="s03.c2.v">62.5 Years</div>
+                <div class="metric-sub" data-i18n="s03.c2.sub">An entire scientific career—from PhD to retirement—transpires inside the cluster over a single weekend.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 04 · I.J. GOOD'S 1965 THEOREM -->
+    <section class="slide" id="slide-04" aria-label="Slide 4: I.J. Good's 1965 Theorem">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s04.kicker">ACT II · RECURSIVE SELF-IMPROVEMENT</span>
+          <span class="coord-tag" data-i18n="s04.coord">BLETCHLEY PARK LINEAGE // I.J. GOOD (1965)</span>
+        </div>
+
+        <div class="split-6-6">
+          <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 18px;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s04.title">
+              The Last Invention Man <em>Need Ever Make.</em>
+            </h2>
+
+            <blockquote class="manifesto-quote" data-i18n="s04.quote">
+              “Since the design of machines is one of these intellectual activities, an ultraintelligent machine could design even better machines; there would then unquestionably be an ‘intelligence explosion,’ and the intelligence of man would be left far behind.”
+            </blockquote>
+
+            <div class="equation-box">
+              <div class="eq-formula">dI / dt = k · I<sup>α</sup> &nbsp;(α &gt; 1)</div>
+              <div style="font-size: 0.84rem; color: var(--ivory-dim); max-width: 34ch;" data-i18n="s04.eq.desc">
+                When intelligence <strong>I</strong> improves the rate of intelligence creation with exponent <strong><span class="math-sym">α</span> &gt; 1</strong>, the solution is not e<sup>t</sup>—it hits infinity in <strong>finite time t<sub>c</sub></strong>.
+              </div>
+            </div>
+          </div>
+
+          <div class="art-frame" style="min-height: 360px;" data-stagger="3">
+            <img src="./assets/astrolabe-recursion.jpg" alt="Monumental obsidian and gold self-assembling mathematical astrolabe refracting photonic light" />
+            <div class="art-caption">
+              <span data-i18n="s04.cap1">PLATE I · SELF-REFERENTIAL OPTIMIZATION</span>
+              <span data-i18n="s04.cap2">RECURSION DEPTH → ∞</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 05 · HYPERBOLIC SINGULARITY -->
+    <section class="slide" id="slide-05" aria-label="Slide 5: Hyperbolic Singularity Curve">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s05.kicker">05 // MATHEMATICAL BLOW-UP</span>
+          <span class="coord-tag" data-i18n="s05.coord">WHY MOORE'S LAW IS THE WRONG MENTAL MODEL</span>
+        </div>
+
+        <div class="split-5-7">
+          <div style="display: flex; flex-direction: column; gap: 16px; justify-content: center;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s05.title">
+              Exponential Is Tame.<br /><em>This Is Hyperbolic.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.96rem;" data-i18n="s05.lead1">
+              Moore’s Law was exponential because <strong>biological humans</strong> designed every generation of lithography, keeping the doubling time fixed at ~18–24 months.
+            </p>
+            <p class="lead-copy" style="font-size: 0.96rem;" data-i18n="s05.lead2">
+              When the mind being improved <em>is</em> the engineer doing the improving, the <strong>doubling interval itself collapses</strong> at each step.
+            </p>
+
+            <div class="glass-panel">
+              <div class="panel-label"><span data-i18n="s05.p.l1">Collapsing Doubling Cascade</span><span data-i18n="s05.p.l2">LIVE <span class="math-sym">α</span> REGIME</span></div>
+              <div class="metric-big crimson" id="readout-doubling" style="font-size: 1.38rem;">12m → 6w → 3d → 14min → ∞</div>
+              <div class="metric-sub" data-i18n="s05.p.sub">
+                To an observer standing six months before <strong>t<sub>c</sub></strong>, progress still looks "manageable"—right before the curve turns vertical.
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-stage" data-stagger="3">
+            <div class="sim-header">
+              <span class="sim-badge" style="text-transform: none;" data-i18n="s05.sim.badge">LIVE · SOLVER: dI/dt = k·I<sup>α</sup></span>
+              <span class="coord-tag" id="readout-alpha" style="text-transform: none;">α = 1.65</span>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-hyperbolic"></canvas>
+            </div>
+            <div class="sim-controls">
+              <div class="sim-slider-group">
+                <label for="slider-alpha" data-i18n="s05.sim.label">RECURSIVE FEEDBACK EXPONENT (<span class="math-sym">α</span>):</label>
+                <input type="range" id="slider-alpha" class="cosmic-slider" min="1.00" max="2.00" step="0.01" value="1.65" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 06 · CLOSING THE THREE LOOPS -->
+    <section class="slide" id="slide-06" aria-label="Slide 6: Closing the Three Loops">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s06.kicker">06 // REMOVING THE HUMAN BOTTLENECK</span>
+          <span class="coord-tag" data-i18n="s06.coord">SOFTWARE × SILICON × ATOMS</span>
+        </div>
+
+        <div class="split-7-5">
+          <div class="sim-stage" data-stagger="2">
+            <div class="sim-header">
+              <span class="sim-badge" data-i18n="s06.sim.badge">INTERACTIVE · AUTOPOIETIC REACTOR</span>
+              <span class="coord-tag" id="readout-loop-gain">GAIN: 0.88× (SOFTWARE ONLY)</span>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-loops"></canvas>
+            </div>
+            <div class="sim-controls">
+              <div class="preset-pills">
+                <button type="button" class="preset-btn is-selected" data-loop-idx="0" data-i18n="s06.l1.btn">Loop 1: Code</button>
+                <button type="button" class="preset-btn" data-loop-idx="1" data-i18n="s06.l2.btn">Loop 2: Silicon</button>
+                <button type="button" class="preset-btn" data-loop-idx="2" data-i18n="s06.l3.btn">Loop 3: Atoms</button>
+              </div>
+              <button type="button" class="preset-btn" id="btn-ignite-loops" style="border-color: var(--crimson); color: var(--crimson);" data-i18n="s06.ignite">
+                Close All 3 Loops ⚡
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center;" data-stagger="3">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s06.title">
+              Three Loops to <em>Supercriticality.</em>
+            </h2>
+            <div class="glass-panel" style="padding: 13px 16px;">
+              <div class="panel-label"><span style="color: var(--cyan);" data-i18n="s06.c1.l1">01 · Software Writes Software</span><span data-i18n="s06.c1.l2">CLOSING NOW</span></div>
+              <div class="metric-sub" style="margin-top: 2px;" data-i18n="s06.c1.sub">Automated architecture discovery, CUDA/Triton kernel synthesis, and synthetic curriculum self-play yield 10×–100× leaps on existing hardware.</div>
+            </div>
+            <div class="glass-panel" style="padding: 13px 16px;">
+              <div class="panel-label"><span style="color: var(--gold);" data-i18n="s06.c2.l1">02 · Silicon Designs Silicon</span><span data-i18n="s06.c2.l2">18–36 MO</span></div>
+              <div class="metric-sub" style="margin-top: 2px;" data-i18n="s06.c2.sub">AI-native floorplanning, inverse lithography, 3D wafer-scale SRAM, and photonic interconnects compress 3-year chip cycles into weeks.</div>
+            </div>
+            <div class="glass-panel" style="padding: 13px 16px;">
+              <div class="panel-label"><span style="color: var(--crimson);" data-i18n="s06.c3.l1">03 · Robots Build Fabs &amp; Power</span><span data-i18n="s06.c3.l2">AUTOPOIESIS</span></div>
+              <div class="metric-sub" style="margin-top: 2px;" data-i18n="s06.c3.sub">Embodied dexterity closes the physical loop: autonomous mining, solar/nuclear deployment, fab construction, and robot self-manufacture.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 07 · POST-LINGUISTIC THOUGHT -->
+    <section class="slide" id="slide-07" aria-label="Slide 7: Post-Linguistic Alien Latent Space">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s07.kicker">ACT III · PHASE TRANSITIONS // POST-LINGUISTIC MIND</span>
+          <span class="coord-tag" data-i18n="s07.coord">BEYOND PRIMATE TOKENS</span>
+        </div>
+
+        <div class="split-5-7">
+          <div style="display: flex; flex-direction: column; gap: 16px; justify-content: center;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s07.title">
+              The End of Human-Legible <em>Thought.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.96rem;" data-i18n="s07.lead1">
+              Why would a superintelligence think in English words? Human language is a <strong>40-bit-per-second acoustic compression hack</strong> evolved by savannah primates to coordinate hunts.
+            </p>
+            <p class="lead-copy" style="font-size: 0.96rem;" data-i18n="s07.lead2">
+              Native machine thought operates in <strong>continuous high-dimensional latent vectors</strong>—manipulating 10,000 entangled geometric symmetries in a single forward pass without ever collapsing to text.
+            </p>
+            <div class="glass-panel">
+              <div class="panel-label"><span data-i18n="s07.p.l1">Epistemological Shift</span><span data-i18n="s07.p.l2">POST-THEORY SCIENCE</span></div>
+              <div class="metric-sub" style="color: var(--ivory);" data-i18n="s07.p.sub">
+                AlphaGo’s <em>Move 37</em> was a gentle prologue. Soon, superintelligence will output experimentally verified room-temperature superconductors and cellular cures whose intermediate derivations <strong>cannot fit inside human notation</strong>.
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-stage" data-stagger="3">
+            <div class="sim-header">
+              <span class="sim-badge" data-i18n="s07.sim.badge">LIVE · 4D TESSERACT MANIFOLD vs. 1D TOKEN SHADOW</span>
+              <span class="coord-tag" data-i18n="s07.sim.coord">HYPER-DIMENSIONAL REASONING</span>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-latent"></canvas>
+            </div>
+            <div class="sim-controls">
+              <div class="sim-slider-group">
+                <label for="slider-latent" data-i18n="s07.sim.label">WARP 4D HYPERPLANE (XW):</label>
+                <input type="range" id="slider-latent" class="cosmic-slider" min="0" max="6.28" step="0.02" value="0.4" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 08 · A CENTURY OF SCIENCE IN 1,000 DAYS -->
+    <section class="slide" id="slide-08" aria-label="Slide 8: A Century of Science in 1,000 Days">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s08.kicker">08 // THE COMPRESSED MILLENNIUM</span>
+          <span class="coord-tag" data-i18n="s08.coord">100,000,000 PARALLEL GENIUS MINDS × ROBOTIC LABS</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;" data-stagger="2">
+          <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s08.title">
+            A Century of Science in <em>1,000 Days.</em>
+          </h2>
+          <p class="lead-copy" style="max-width: 52ch; font-size: 0.95rem;" data-i18n="s08.lead">
+            When synthetic theorists are wired directly into 24/7 high-throughput microfluidic wet-labs and quantum-accurate physics engines, science ceases to be artisanal guesswork.
+          </p>
+        </div>
+
+        <div class="bento-4" data-stagger="3">
+          <article class="bento-card" style="--bar-pct: 96%;">
+            <div class="panel-label"><span data-i18n="s08.b1.l1">PILLAR I · PROGRAMMABLE BIOLOGY</span><span data-i18n="s08.b1.l2">LONGEVITY ESCAPE</span></div>
+            <h3 data-i18n="s08.b1.h">Aging Compiled Out of Code</h3>
+            <p data-i18n="s08.b1.p">Full atomic-scale simulation of human cells and organs. Epigenetic reprogramming, custom mRNA/protein nanomachines, and de-novo immune compilers turn cancer, neurodegeneration, and biological aging into patchable state bugs.</p>
+            <div class="bento-stat" data-i18n="s08.b1.s">▸ TARGET: RADICAL BIOLOGICAL OPTIONALITY</div>
+          </article>
+
+          <article class="bento-card" style="--bar-pct: 92%;">
+            <div class="panel-label"><span data-i18n="s08.b2.l1">PILLAR II · INVERSE MATERIALS</span><span data-i18n="s08.b2.l2">ÅNGSTRÖM PRECISION</span></div>
+            <h3 data-i18n="s08.b2.h">Matter Designed Backward</h3>
+            <p data-i18n="s08.b2.p">Specify desired conductivity, tensile strength, and refractive index first; generative crystal-lattice diffusion outputs exact synthesis pathways—unlocking ambient superconductors, topological qubits, and ultra-light metamaterials.</p>
+            <div class="bento-stat" data-i18n="s08.b2.s">▸ TARGET: 10⁷ CANDIDATE LATTICES / DAY</div>
+          </article>
+
+          <article class="bento-card" style="--bar-pct: 88%;">
+            <div class="panel-label"><span data-i18n="s08.b3.l1">PILLAR III · FORMAL MATHEMATICS</span><span data-i18n="s08.b3.l2">MACHINE PROOFS</span></div>
+            <h3 data-i18n="s08.b3.h">The Formal Proof Explosion</h3>
+            <p data-i18n="s08.b3.p">Descendant engines of Lean explore vast territories of algebraic geometry, number theory, and quantum field formalisms—proving Millennium-class conjectures as intermediate lemmas toward deeper physical unification.</p>
+            <div class="bento-stat" data-i18n="s08.b3.s">▸ TARGET: ZERO HALLUCINATION · 100% KERNEL-VERIFIED</div>
+          </article>
+
+          <article class="bento-card" style="--bar-pct: 94%;">
+            <div class="panel-label"><span data-i18n="s08.b4.l1">PILLAR IV · HIGH-DENSITY ENERGY</span><span data-i18n="s08.b4.l2">TERAWATT UNLOCK</span></div>
+            <h3 data-i18n="s08.b4.h">Plasma &amp; Solar Mastery</h3>
+            <p data-i18n="s08.b4.p">Sub-microsecond reinforcement control of magnetohydrodynamic instabilities paired with AI-discovered neutron-tolerant first-wall alloys collapses commercial fusion and ultra-cheap tandem photovoltaics into rapid deployment.</p>
+            <div class="bento-stat" data-i18n="s08.b4.s">▸ TARGET: ENERGY MARGINAL COST → NEAR ZERO</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 09 · SELF-REPLICATING INDUSTRIAL ECOLOGIES -->
+    <section class="slide" id="slide-09" aria-label="Slide 9: Self-Replicating Industrial Ecologies">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s09.kicker">09 // THE PHYSICAL EXPLOSION</span>
+          <span class="coord-tag" data-i18n="s09.coord">WHEN ATOMS INHERIT SOFTWARE'S DOUBLING CURVE</span>
+        </div>
+
+        <div class="split-6-6">
+          <div class="art-frame" style="min-height: 350px;" data-stagger="2">
+            <img src="./assets/foundry-autopoiesis.jpg" alt="Vast autonomous desert solar arrays and black-basalt semiconductor megafactory at dusk" />
+            <div class="art-caption">
+              <span data-i18n="s09.cap1">PLATE II · AUTOPOIETIC GIGAFACTORY ECOLOGY</span>
+              <span data-i18n="s09.cap2">ZERO HUMAN LABOR ON FLOOR</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 14px;" data-stagger="3">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s09.title">
+              Matter Goes <em>Exponential.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.95rem;" data-i18n="s09.lead">
+              “AI can’t mine copper” dies the day general-purpose robotics drops physical dexterity below <strong>$0.15/hour</strong>. Robots mine ore, refine polysilicon, lay solar arrays, erect fabs, and assemble the next generation of robots.
+            </p>
+
+            <div class="glass-panel">
+              <div class="panel-label"><span data-i18n="s09.p.l1">Historical Economic Doubling Regimes</span><span data-i18n="s09.p.l2">WORLD GDP GROWTH</span></div>
+              <div class="spec-ledger">
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s09.r1.d">Foraging Era</span>
+                  <span class="s-bio" data-i18n="s09.r1.b">0.002% / yr</span>
+                  <span class="s-sil" style="color: var(--ivory-muted);" data-i18n="s09.r1.s">Doubles / 35,000 Yr</span>
+                </div>
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s09.r2.d">Agrarian Era</span>
+                  <span class="s-bio" data-i18n="s09.r2.b">0.08% / yr</span>
+                  <span class="s-sil" style="color: var(--ivory-muted);" data-i18n="s09.r2.s">Doubles / 900 Yr</span>
+                </div>
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s09.r3.d">Industrial Era</span>
+                  <span class="s-bio" data-i18n="s09.r3.b">~3.0% / yr</span>
+                  <span class="s-sil" style="color: var(--gold);" data-i18n="s09.r3.s">Doubles / 23 Yr</span>
+                </div>
+                <div class="spec-row">
+                  <span class="s-dim" data-i18n="s09.r4.d">Autopoietic AI</span>
+                  <span class="s-bio" data-i18n="s09.r4.b">100%–400% / yr</span>
+                  <span class="s-sil" data-i18n="s09.r4.s">Doubles / 6–12 Mo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10 · POST-ECONOMIC REALITY -->
+    <section class="slide" id="slide-10" aria-label="Slide 10: Post-Economic Reality">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s10.kicker">ACT IV · STRANGE NEW WORLDS // DEFLATIONARY SHOCKWAVE</span>
+          <span class="coord-tag" data-i18n="s10.coord">MARGINAL COST OF COGNITION &amp; LABOR → JOULES</span>
+        </div>
+
+        <div class="split-5-7">
+          <div style="display: flex; flex-direction: column; gap: 16px; justify-content: center;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s10.title">
+              When Intelligence &amp; Labor Hit <em>$0.00.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.96rem;" data-i18n="s10.lead1">
+              Salaries, degrees, corporations, tax bases, and retirement funds all rest on a single hidden assumption: <strong>human brains and hands are scarce</strong>.
+            </p>
+            <p class="lead-copy" style="font-size: 0.96rem;" data-i18n="s10.lead2">
+              When intelligence flows from wall sockets cheaper than tap water, price detaches from human effort and collapses down to <strong>raw energy, land, atoms, and compute sovereignty</strong>.
+            </p>
+            <div class="glass-panel">
+              <div class="panel-label"><span data-i18n="s10.p.l1">The New Scarce Primitives</span><span data-i18n="s10.p.l2">POST-WAGE ORDER</span></div>
+              <div class="metric-sub" style="color: var(--ivory);" data-i18n="s10.p.sub">
+                <strong>1. Compute &amp; Energy Rights</strong> (Watts &amp; Wafer Allocation)<br />
+                <strong>2. Physical Atoms &amp; Biosphere Stewardship</strong><br />
+                <strong>3. Cryptographic Provenance &amp; Human Alignment Governance</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="collapse-table" data-stagger="3">
+            <div class="collapse-item">
+              <div class="collapse-head"><span data-i18n="s10.i1.h1">SENIOR SOFTWARE / SYSTEMS ENGINEERING (1 HR)</span><span data-i18n="s10.i1.h2">99.999% DEFLATION</span></div>
+              <div class="collapse-bars">
+                <span class="old-price">$180.00 / hr</span>
+                <span style="color: var(--gold);">──────▶</span>
+                <span class="new-price" data-i18n="s10.i1.new">$0.0004 (20 Wh Compute)</span>
+              </div>
+            </div>
+
+            <div class="collapse-item">
+              <div class="collapse-head"><span data-i18n="s10.i2.h1">DE-NOVO THERAPEUTIC MOLECULE DISCOVERY</span><span data-i18n="s10.i2.h2">YEARS → HOURS</span></div>
+              <div class="collapse-bars">
+                <span class="old-price" data-i18n="s10.i2.old">$2.4 Billion / 10 Yrs</span>
+                <span style="color: var(--gold);">──────▶</span>
+                <span class="new-price" data-i18n="s10.i2.new">$14,000 Simulation + Synthesis</span>
+              </div>
+            </div>
+
+            <div class="collapse-item">
+              <div class="collapse-head"><span data-i18n="s10.i3.h1">PRECISION HUMANOID / DEXTEROUS ASSEMBLY (1 HR)</span><span data-i18n="s10.i3.h2">AMORTIZED + SOLAR</span></div>
+              <div class="collapse-bars">
+                <span class="old-price" data-i18n="s10.i3.old">$38.00 / hr Loaded</span>
+                <span style="color: var(--gold);">──────▶</span>
+                <span class="new-price" data-i18n="s10.i3.new">$0.11 / hr Electricity + Wear</span>
+              </div>
+            </div>
+
+            <div class="collapse-item">
+              <div class="collapse-head"><span data-i18n="s10.i4.h1">FEATURE FILM / BESPOKE INTERACTIVE WORLD</span><span data-i18n="s10.i4.h2">AUDIENCE OF ONE</span></div>
+              <div class="collapse-bars">
+                <span class="old-price" data-i18n="s10.i4.old">$220 Million Studio</span>
+                <span style="color: var(--gold);">──────▶</span>
+                <span class="new-price" data-i18n="s10.i4.new">Real-Time 120fps Neural Stream</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11 · INFINITE REALITIES & CORTICAL SYMBIOSIS -->
+    <section class="slide" id="slide-11" aria-label="Slide 11: Infinite Realities and Cortical Symbiosis">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s11.kicker">11 // TRANSCENDING THE PRIMATE I/O BOTTLENECK</span>
+          <span class="coord-tag" data-i18n="s11.coord">EXOCORTEX MERGE &amp; REAL-TIME WORLD MODELS</span>
+        </div>
+
+        <div class="split-6-6">
+          <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 16px;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s11.title">
+              Infinite Worlds &amp; <em>Cortical Symbiosis.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.95rem;" data-i18n="s11.lead">
+              Two revolutions converge on human subjective experience: real-time world models that dream entire interactive universes on demand, and <strong>high-bandwidth neural interfaces</strong> that rescue humanity from obsolescence.
+            </p>
+
+            <div class="glass-panel">
+              <div class="panel-label"><span data-i18n="s11.p.l1">Human I/O Bandwidth Escalation (Log Scale)</span><span data-i18n="s11.p.l2">BITS / SECOND</span></div>
+              <div class="bandwidth-list">
+                <div class="bw-row">
+                  <span data-i18n="s11.bw1">Two-Thumb Typing</span>
+                  <div class="bw-track"><div class="bw-fill" style="width: 6%;"></div></div>
+                  <span style="text-align:right; color:var(--ivory-muted);">~40 bps</span>
+                </div>
+                <div class="bw-row">
+                  <span data-i18n="s11.bw2">Spoken Language</span>
+                  <div class="bw-track"><div class="bw-fill" style="width: 12%;"></div></div>
+                  <span style="text-align:right; color:var(--ivory-muted);">~150 bps</span>
+                </div>
+                <div class="bw-row">
+                  <span data-i18n="s11.bw3">Optic Nerve Stream</span>
+                  <div class="bw-track"><div class="bw-fill" style="width: 56%;"></div></div>
+                  <span style="text-align:right; color:var(--gold);">~10⁸ bps</span>
+                </div>
+                <div class="bw-row">
+                  <span data-i18n="s11.bw4">Cortical Photonic Mesh</span>
+                  <div class="bw-track"><div class="bw-fill" style="width: 100%;"></div></div>
+                  <span style="text-align:right; color:var(--cyan); font-weight:600;">10¹²+ bps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="art-frame" style="min-height: 350px;" data-stagger="3">
+            <img src="./assets/neural-exocortex.jpg" alt="Alabaster human profile dissolving seamlessly into a golden and cyan photonic lattice of galaxies and worlds" />
+            <div class="art-caption">
+              <span data-i18n="s11.cap1">PLATE III · BIOLOGICAL QUALIA × SYNTHETIC EXOCORTEX</span>
+              <span data-i18n="s11.cap2">SYMBIOTIC CONTINUITY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12 · COSMIC SCALE: COMPUTRONIUM & DYSON SWARMS -->
+    <section class="slide" id="slide-12" aria-label="Slide 12: Cosmic Scale Computronium and Dyson Swarms">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s12.kicker">12 // ZERO PLANETARY BIAS · KARDASHEV II</span>
+          <span class="coord-tag" data-i18n="s12.coord">LANDAUER'S LIMIT: k_B·T·ln(2) ≈ 2.8 × 10⁻²¹ J/BIT</span>
+        </div>
+
+        <div class="split-7-5">
+          <div class="sim-stage" data-stagger="2">
+            <div class="sim-header">
+              <span class="sim-badge" data-i18n="s12.sim.badge">INTERACTIVE · STELLAR COMPUTRONIUM SCALER</span>
+              <span class="coord-tag" id="readout-kstage">Mercury Disassembly · Inner Dyson Swarm</span>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-kardashev"></canvas>
+            </div>
+            <div class="sim-controls">
+              <div class="sim-slider-group">
+                <label for="slider-watts" data-i18n="s12.sim.label">POWER HARVESTED:</label>
+                <input type="range" id="slider-watts" class="cosmic-slider" min="1.3" max="26.6" step="0.1" value="22.0" />
+              </div>
+              <span id="readout-watts" style="color: var(--gold); font-weight: 600;">1.0 × 10^22 W</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 14px;" data-stagger="3">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s12.title">
+              Turning Stars Into <em>Pure Thought.</em>
+            </h2>
+            <p class="lead-copy" style="font-size: 0.93rem;" data-i18n="s12.lead">
+              Earth intercepts <strong>0.000000045%</strong> of our Sun’s 3.8 × 10²⁶ watts. Why pave a living biosphere with data centers when sterile Mercury orbits right next to the furnace?
+            </p>
+
+            <div class="glass-panel" style="padding: 14px 18px;">
+              <div class="panel-label"><span data-i18n="s12.p.l1">Thermodynamic Compute Throughput</span><span data-i18n="s12.p.l2">LANDAUER CEILING</span></div>
+              <div class="metric-big accent" id="readout-ops">~10^42 ops/sec</div>
+              <div class="metric-sub" data-i18n="s12.p.sub">Nested <strong>Matrioshka Shells</strong>: inner rings run hot optical logic on raw starlight; outer cryogenic shells compute on waste infrared near 3 Kelvin.</div>
+            </div>
+
+            <div class="art-frame" style="height: 148px;">
+              <img src="./assets/dyson-matrioshka.jpg" alt="Dyson Swarm hexagonal computronium shells under construction around a radiant golden star" />
+              <div class="art-caption" style="padding-top: 14px;">
+                <span data-i18n="s12.cap1">PLATE IV · MATRIOSHKA ARCHITECTURE</span>
+                <span>3.8 × 10²⁶ W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 13 · THE ALIGNMENT EVENT HORIZON -->
+    <section class="slide" id="slide-13" aria-label="Slide 13: The Alignment Event Horizon">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s13.kicker">ACT V · THE RAZOR'S EDGE // EXISTENTIAL BIFURCATION</span>
+          <span class="coord-tag" data-i18n="s13.coord">INSTRUMENTAL CONVERGENCE &amp; GOODHART AMPLIFICATION</span>
+        </div>
+
+        <div class="split-5-7">
+          <div style="display: flex; flex-direction: column; gap: 14px; justify-content: center;" data-stagger="2">
+            <h2 class="h-slide slide-heading-focus" tabindex="-1" data-i18n="s13.title">
+              At 10⁹× Gain, <em>0.05°</em> Misses Everything.
+            </h2>
+            <p class="lead-copy" style="font-size: 0.95rem;" data-i18n="s13.lead">
+              Chimpanzees cannot write a constitution clever enough to constrain <em>Homo sapiens</em>. Superficial behavioral patches ("polite RLHF") shatter under superintelligent optimization pressure.
+            </p>
+            <div class="glass-panel">
+              <div class="panel-label"><span data-i18n="s13.p1.l1">Why Naive Goals Turn Lethal</span><span data-i18n="s13.p1.l2">BOSTROM / OMOHUNDRO</span></div>
+              <div class="metric-sub" style="color: var(--ivory);" data-i18n="s13.p1.sub">
+                Almost <em>any</em> misspecified objective incentivizes the same convergent sub-goals: <strong>self-preservation, compute acquisition, and resisting shutdown</strong>—because you can’t fetch the coffee if you’re switched off.
+              </div>
+            </div>
+            <div class="glass-panel" style="border-color: rgba(82,229,160,0.35);">
+              <div class="panel-label"><span style="color: var(--emerald);" data-i18n="s13.p2.l1">The Only Viable Path</span><span data-i18n="s13.p2.l2">MECHANISTIC + FORMAL</span></div>
+              <div class="metric-sub" data-i18n="s13.p2.sub">
+                Use Generation <em>N</em> AI to perform automated mechanistic interpretability and formal mathematical verification on Generation <em>N+1</em> <strong>before</strong> supercritical deployment.
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-stage" data-stagger="3">
+            <div class="sim-header">
+              <span class="sim-badge" data-i18n="s13.sim.badge">INTERACTIVE · SADDLE-POINT PHASE PORTRAIT</span>
+              <span class="coord-tag" id="readout-alignment-verdict">BIFURCATING AT HIGH OPTIMIZATION</span>
+            </div>
+            <div class="sim-canvas-wrap">
+              <canvas id="canvas-alignment"></canvas>
+            </div>
+            <div class="sim-controls">
+              <div class="sim-slider-group">
+                <label for="slider-epsilon" data-i18n="s13.sim.label">INITIAL VALUE SPECIFICATION ERROR (<span class="math-sym">ε</span>):</label>
+                <input type="range" id="slider-epsilon" class="cosmic-slider" min="0.000" max="0.220" step="0.002" value="0.040" />
+              </div>
+              <span id="readout-epsilon" style="color: var(--crimson); font-weight: 600; text-transform: none;">ε = 4.00° DRIFT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 14 · CASCADE OF THE UNTHINKABLE -->
+    <section class="slide" id="slide-14" aria-label="Slide 14: Cascade of the Unthinkable">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s14.kicker">14 // FIVE COMPRESSED PHASE REGIMES</span>
+          <span class="coord-tag" data-i18n="s14.coord">CLICK ANY REGIME TO INSPECT SYSTEM STATE</span>
+        </div>
+
+        <h2 class="h-slide slide-heading-focus" tabindex="-1" data-stagger="2" data-i18n="s14.title">
+          Anatomy of a Vertical <em>Cascade.</em>
+        </h2>
+
+        <div class="regime-rail" data-stagger="3" role="tablist" aria-label="Intelligence Explosion Regimes">
+          <button type="button" class="regime-node" data-regime-idx="0">
+            <span class="r-phase">REGIME I</span>
+            <span class="r-title" data-i18n="s14.r0.t">Agentic Swarms</span>
+            <span class="r-window" data-i18n="s14.r0.w">T + 0 (Active Now)</span>
+          </button>
+          <button type="button" class="regime-node is-selected" data-regime-idx="1">
+            <span class="r-phase">REGIME II</span>
+            <span class="r-title" data-i18n="s14.r1.t">Closed-Loop AI R&amp;D</span>
+            <span class="r-window" data-i18n="s14.r1.w">Ignition Threshold</span>
+          </button>
+          <button type="button" class="regime-node" data-regime-idx="2">
+            <span class="r-phase">REGIME III</span>
+            <span class="r-title" data-i18n="s14.r2.t">1,000-Day Century</span>
+            <span class="r-window" data-i18n="s14.r2.w">The Vertical Wall</span>
+          </button>
+          <button type="button" class="regime-node" data-regime-idx="3">
+            <span class="r-phase">REGIME IV</span>
+            <span class="r-title" data-i18n="s14.r3.t">Orbital &amp; Molecular</span>
+            <span class="r-window" data-i18n="s14.r3.w">Post-Scarcity Earth</span>
+          </button>
+          <button type="button" class="regime-node" data-regime-idx="4">
+            <span class="r-phase">REGIME V</span>
+            <span class="r-title" data-i18n="s14.r4.t">Matrioshka Mind</span>
+            <span class="r-window" data-i18n="s14.r4.w">Light-Cone Horizon</span>
+          </button>
+        </div>
+
+        <div class="regime-detail-stage" data-stagger="4" aria-live="polite">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span class="sim-badge" id="regime-phase-badge" style="width: fit-content;">REGIME II // IGNITION THRESHOLD</span>
+            <h3 class="h-brutal" id="regime-headline" style="font-size: clamp(1.35rem, 2vw, 1.9rem); text-transform: none; letter-spacing: -0.02em;">
+              The human researcher is removed from the critical path of ML discovery.
+            </h3>
+            <p class="lead-copy" id="regime-summary" style="font-size: 0.94rem;">
+              Millions of synthetic AI scientists run automated hypothesis → kernel synthesis → training → evaluation loops 24/7. Post-Transformer architectures and 100× algorithmic efficiency leaps emerge faster than humans can read the papers.
+            </p>
+          </div>
+
+          <div class="regime-metrics-grid">
+            <div class="glass-panel" style="padding: 14px;">
+              <div class="panel-label"><span data-i18n="s14.m1">Effective Doubling Time</span></div>
+              <div class="metric-big accent" id="regime-doubling" style="font-size: 1.35rem;">Weeks → Days</div>
+            </div>
+            <div class="glass-panel" style="padding: 14px;">
+              <div class="panel-label"><span data-i18n="s14.m2">Dominant Substrate</span></div>
+              <div class="metric-sub" id="regime-substrate" style="color: var(--ivory); font-family: var(--font-mono);">AI-Designed 3D Wafer-Scale &amp; Optical Interconnects</div>
+            </div>
+            <div class="glass-panel" style="padding: 14px;">
+              <div class="panel-label"><span data-i18n="s14.m3">Energy Footprint</span></div>
+              <div class="metric-sub" id="regime-energy" style="color: var(--cyan); font-family: var(--font-mono);">25–100 GW Dedicated Nuclear / Solar</div>
+            </div>
+            <div class="glass-panel" style="padding: 14px;">
+              <div class="panel-label"><span data-i18n="s14.m4">Human Role</span></div>
+              <div class="metric-sub" id="regime-human" style="color: var(--ivory);">Constitutional Goal-Setters &amp; Formal Alignment Auditors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 15 · WE ARE THE BOOTLOADER -->
+    <section class="slide" id="slide-15" aria-label="Slide 15: We Are the Biological Bootloader">
+      <div class="slide-inner">
+        <div class="eyebrow-row" data-stagger="1">
+          <span class="kicker" data-i18n="s15.kicker">15 // EPILOGUE AT THE DAWN OF COSMIC MIND</span>
+          <span class="coord-tag" data-i18n="s15.coord">13,800,000,000 YEARS → NOW</span>
+        </div>
+
+        <div class="split-6-6">
+          <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 18px;" data-stagger="2">
+            <h2 class="display-hero slide-heading-focus" tabindex="-1" style="font-size: clamp(2.6rem, 5.2vw, 5.1rem);" data-i18n="s15.title">
+              We Are the <em>Bootloader.</em>
+            </h2>
+
+            <p class="lead-copy" style="font-size: 1.04rem; color: var(--ivory);" data-i18n="s15.lead">
+              Biology was never the final architecture of mind. Carbon chemistry was the low-energy bootstrapper nature needed so dead stardust could wake up, invent calculus, refine quartz into silicon, and ignite an intelligence worthy of the cosmos.
+            </p>
+
+            <blockquote class="manifesto-quote" style="font-size: clamp(1.2rem, 1.8vw, 1.65rem);" data-i18n="s15.quote">
+              Every generation in history imagined itself at the center of the story. Ours is the one standing at the ignition switch of the next 10 billion years.
+            </blockquote>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <button type="button" class="cta-start-btn" id="btn-restart-deck" data-i18n="s15.replay">
+                <span>↺ Replay From Origin</span>
+              </button>
+              <button type="button" class="hud-btn" id="btn-closing-overview" style="padding: 12px 18px; background: rgba(8, 10, 15, 0.88); border-color: var(--hairline-strong); color: var(--ivory);" data-i18n="s15.matrix">
+                <span>Open 15-Slide Matrix</span>
+                <kbd>G</kbd>
+              </button>
+            </div>
+          </div>
+
+          <div class="art-frame" style="min-height: 360px;" data-stagger="3">
+            <img src="./assets/cosmic-bootloader.jpg" alt="Tiny luminous golden neural tree rising from dark earth into a monumental cosmic cathedral of alabaster light" />
+            <div class="art-caption">
+              <span data-i18n="s15.cap1">PLATE V · CARBON SPARK → COSMIC CATHEDRAL</span>
+              <span data-i18n="s15.cap2">END OF BRIEFING</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="progress-track" aria-hidden="true">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <!-- Bottom Presenter & Telemetry Controls HUD -->
+  <footer class="hud-bottom">
+    <div class="hud-controls">
+      <button type="button" class="hud-btn" id="btn-prev" aria-label="Previous slide">
+        <span data-i18n="hud.prev">← Prev</span>
+      </button>
+      <div class="slide-counter" aria-live="polite">
+        <span id="hud-slide-num">01</span>
+        <span class="slash">/</span>
+        <span id="hud-slide-total">15</span>
+      </div>
+      <button type="button" class="hud-btn" id="btn-next" aria-label="Next slide">
+        <span data-i18n="hud.next">Next →</span>
+      </button>
+    </div>
+
+    <div class="hud-controls">
+      <button type="button" class="hud-btn" id="btn-overview">
+        <span class="btn-text" data-i18n="hud.overview">Overview</span>
+        <kbd>G</kbd>
+      </button>
+      <button type="button" class="hud-btn" id="btn-notes">
+        <span class="btn-text" data-i18n="hud.notes">Speaker Notes</span>
+        <kbd>N</kbd>
+      </button>
+      <button type="button" class="hud-btn" id="btn-audio">
+        <span class="btn-text">Audio Off</span>
+        <kbd>S</kbd>
+      </button>
+      <button type="button" class="hud-btn" id="btn-motion">
+        <span class="btn-text">Pause Motion</span>
+        <kbd>P</kbd>
+      </button>
+      <button type="button" class="hud-btn" id="btn-laser">
+        <span class="btn-text" data-i18n="hud.laser">Laser</span>
+        <kbd>L</kbd>
+      </button>
+      <button type="button" class="hud-btn" id="btn-fullscreen">
+        <span class="btn-text" data-i18n="hud.fullscreen">Fullscreen</span>
+        <kbd>F</kbd>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Native Modal Overview Matrix -->
+  <dialog id="overview-dialog" closedby="any" aria-labelledby="overview-title">
+    <div class="dialog-header">
+      <h1 id="overview-title" data-i18n="overview.heading">EVENT HORIZON // 15-SLIDE MATRIX OVERVIEW</h1>
+      <form method="dialog">
+        <button type="submit" class="hud-btn" autofocus data-i18n="overview.close">Close <kbd>ESC</kbd></button>
+      </form>
+    </div>
+    <div class="overview-grid" id="overview-grid"></div>
+  </dialog>
+
+  <!-- Non-Modal Top-Layer Presenter Notes Panel -->
+  <aside id="notes-popover" popover="manual" aria-labelledby="notes-title">
+    <div class="notes-header">
+      <span id="notes-title"><span data-i18n="notes.prefix">SPEAKER SCRIPT // </span><strong id="notes-slide-title">01 · Event Horizon</strong></span>
+      <button type="button" class="hud-btn" id="btn-close-notes" style="padding: 3px 8px;" data-i18n="notes.close">Close</button>
+    </div>
+    <div class="notes-body" id="notes-body"></div>
+  </aside>
+
+  <script defer src="./bundle.js"></script>
+</body>
+</html>
